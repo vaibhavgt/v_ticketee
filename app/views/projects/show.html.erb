@@ -1,9 +1,17 @@
 <h1><% title(@project.name, "Project") %> </h1>
-<%= @project.name %>
+`<%= @project.name %>
 <ul>
 <li><%= link_to "Edit Project", edit_project_path(@project) %></li>
 <li><%= link_to "Delete Project", project_path(@project), method: :delete,
-data: { confirm:
-"Are you sure you want to delete this project?"
-}%></li>
+data: { confirm:"Are you sure you want to delete this project?"}%></li>
+
+<ul id='tickets'>
+<% @project.tickets.each do |ticket| %>
+<li>
+#<%= ticket.id %> -
+<%= link_to ticket.title, [@project, ticket] %>
+</li>
+<% end %>
+</ul>
+
 <li> <%= link_to "New ticket", new_project_ticket_path(@project) %> </li>
