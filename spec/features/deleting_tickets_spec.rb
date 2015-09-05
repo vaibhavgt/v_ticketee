@@ -1,4 +1,4 @@
-equire 'spec_helper'
+require 'spec_helper'
 feature 'Deleting tickets' do
 let!(:project) { FactoryGirl.create(:project) }
 let!(:ticket) { FactoryGirl.create(:ticket, project: project) }
