@@ -12,7 +12,6 @@ def new
 end
 
 def create
-	@arr = product_params
 	@project = Project.new(project_params)
 
 	if @project.save 
