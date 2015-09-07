@@ -1,8 +1,8 @@
 class TicketsController < ApplicationController
-
+before_action :authorize_admin!, except: [:index, :show]
 before_action :set_project
 before_action :set_ticket, only: [:edit, :show, :update, :destroy]
-before_action :require_signin!, except: [:show, :index]
+
 def new
 	@ticket = @project.tickets.build
 end
@@ -39,6 +39,16 @@ def destroy
 end
 
 private
+
+def authorize_admin!
+	require_signin!
+	unless current_user.admin?
+		flash[:alert] = "You Must be an admin to do that"
+	end
+
+
+end
+
 
 def ticket_params
 	params.require(:ticket).permit(:title, :description )
