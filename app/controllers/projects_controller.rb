@@ -52,12 +52,6 @@ def destroy
 end
 private
 
-def authorize_admin!
-	require_signin!
-	unless current_user.admin?
-		flash[:alert] = "You Must be an admin to do that"
-	end
-end
 
 def project_params
       params.require(:project).permit(:name, :description)
