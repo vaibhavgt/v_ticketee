@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
 
+before_action :authorize_admin!, except: [:index, :show]
 before_action :set_project, only: [:show,:edit,:update,:destroy]
 
 def index
@@ -50,6 +51,13 @@ def destroy
 	redirect_to projects_path
 end
 private
+
+def authorize_admin!
+	require_signin!
+	unless current_user.admin?
+		flash[:alert] = "You Must be an admin to do that"
+	end
+end
 
 def project_params
       params.require(:project).permit(:name, :description)
