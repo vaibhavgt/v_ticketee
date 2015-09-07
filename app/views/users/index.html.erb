@@ -1,0 +1,9 @@
+<ul>
+<% @users.each do |u| %>
+<li>
+<%= u.name %>
+<%= link_to "Edit User", edit_user_path(u) %>
+<%= link_to "more Details", user_path(u) %>
+</li>
+<%  end %>
+</ul>
